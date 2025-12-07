@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dispatch Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Bartender Dispatch</h1>
+
+    <div id="auth-section">
+        <h2>Staff Login</h2>
+        <input type="email" id="email" placeholder="Staff Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="staffLogin()">Login</button>
+    </div>
+    
+    <div id="dashboard-content" style="display: none;">
+        <h2>Incoming Service Requests</h2>
+        <div id="request-list">
+            <p style="color: var(--color-muted);">No active requests.</p>
+        </div>
+
+        <hr>
+
+        <h2>Active Pool Match Requests</h2>
+        <div id="pool-match-list">
+             <p style="color: var(--color-muted);">No active pool requests.</p>
+            </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

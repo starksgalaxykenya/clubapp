@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Service - Table</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ADD CSS for Modal (Minimalist and Abstract) */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 100; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.7); /* Dark overlay */
+        }
+        .modal-content {
+            background-color: var(--color-bg);
+            margin: 5% auto; 
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .close-btn {
+            color: var(--color-text);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-btn:hover,
+        .close-btn:focus {
+            color: var(--color-danger);
+            text-decoration: none;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quantity-control button {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            margin: 0;
+            line-height: 1;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .order-summary {
+            border-top: 2px solid var(--color-primary);
+            padding-top: 1rem;
+            margin-top: 1rem;
+            text-align: right;
+        }
+        .order-summary strong {
+            font-size: 1.2rem;
+            display: block;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="service-section">
+        <h2>Quick Service</h2>
+        <button onclick="requestService('Bartender')">Call Bartender</button>
+        <button onclick="requestService('Security')">Call Security</button>
+        <button class="btn-danger" onclick="requestService('Emergency')">🚨 Emergency</button>
+        <button onclick="requestService('POS/Receipt')">Request POS/Receipt</button>
+    </div>
+
+    <hr>
+
+    <div id="order-section">
+        <h2>Menu & Ordering</h2>
+        <button onclick="openMenuModal()">Browse Menu & Order</button>
+        <p id="current-order-status" style="margin-top: 1rem; color: var(--color-muted);"></p>
+    </div>
+
+    <hr>
+
+    <div id="pool-section">
+        <h2>🎱 Pool Match</h2>
+        <button onclick="requestPoolMatch()">Request A Player</button>
+        <div id="match-status"></div>
+    </div>
+
+    <div id="status-tracking">
+        <h2>My Active Request Status:</h2>
+        <p id="current-status">No active request.</p>
+        <p id="current-eta"></p>
+    </div>
+
+    <div id="menu-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeMenuModal()">&times;</span>
+            <h2>Club Menu</h2>
+
+            <div id="modal-menu-items">
+                </div>
+
+            <div class="order-summary">
+                <p>Subtotal: <span id="order-subtotal">$0.00</span></p>
+                <strong>TOTAL: <span id="order-total">$0.00</span></strong>
+                <button id="place-order-btn" onclick="placeOrder()">Place Order (<span id="final-total">$0.00</span>)</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="client.js"></script>
+</body>
+</html>
